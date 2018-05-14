@@ -11,10 +11,12 @@ public class Telewizor {
 	int channel;
 	float volume;
 	boolean muted;
-
+	
 	public static void main(String[] args) {
+		
 		Telewizor telewizorek = new Telewizor();
-		telewizorek.showStatus();
+		telewizorek.setChannel(15);
+		telewizorek.volumeUp(7);
 	}
 
 	public int getChannel() {
@@ -29,27 +31,35 @@ public class Telewizor {
 		if (channel < maxChannel)
 			channel = channel + 1;
 		else
-			System.out.println("„brak kana³u :" + channel);
+			System.out.println("„brak kanalu :" + channel);
 	}
 
 	public void channelDown() {
 		if (channel > minChannel)
 			channel = channel - 1;
 		else
-			System.out.println("„brak kana³u :" + channel);
-
+			System.out.println("„brak kanalu :" + channel);
 	}
 
-	public void volumeUp() {
-		volume = volume + 0.5f;
-		System.out.println(prepareVolumeMessage());
+	public void volumeUp(int up) {
+		if (muted){
+			muted = false;
+			}
+		do{
+			volume = volume + 0.5f;
+			System.out.println(prepareVolumeMessage());	
+		}
+		while( volume <= up);
 	}
-
-	public void volumeDown() {
-		
-		if (muted==true)
-		volume = volume - 0.5f;
-		System.out.println(prepareVolumeMessage());
+	
+	public void volumeDown(int down) {
+		if (muted){
+		muted = false;
+		}
+		do {
+			volume = volume - 0.5f;
+			System.out.println(prepareVolumeMessage());
+		} while (volume >= down );
 	}
 
 	public String prepareVolumeMessage() {
@@ -81,5 +91,4 @@ public class Telewizor {
 	public void mute() {
 		muted = !muted;
 	}
-	
 }
